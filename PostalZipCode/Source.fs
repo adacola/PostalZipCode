@@ -13,7 +13,7 @@ type private JapanpostSourceProvider =
         HasHeaders = false,
         Encoding = "shift_jis">
 
-type private JapanpostSourceRow = JapanpostSourceProvider.Row
+type JapanpostSourceRow = JapanpostSourceProvider.Row
 
 module Source =
 
@@ -68,7 +68,7 @@ module Source =
 
         let tryToAddress (prefectureCache : IDictionary<string, Prefecture>) convertStreetNumber = function
             | [] -> []
-            | ((row : JapanpostSourceProvider.Row)::_) as rows ->
+            | ((row : JapanpostSourceRow)::_) as rows ->
                 let prefectureCode = row.全国地方公共団体コード.[.. 1]
                 let prefecture =
                     match prefectureCache.TryGetValue prefectureCode with
