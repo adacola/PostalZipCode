@@ -1,7 +1,6 @@
 ﻿namespace Adacola.PostalZipCode
 
 open FsUnit
-open FsCheck
 open NUnit.Framework
 
 [<TestFixture>]
@@ -14,7 +13,7 @@ module SourceTest =
 
     let toAddress (source : string) =
         use stream = new MemoryStream(encoding.GetBytes source)
-        Source.readJapanpostSource stream |> Seq.toList |> List.rev
+        Source.readJapanpostSource stream |> Seq.toList
 
     let kenAllData = File.ReadAllLines("KEN_ALL.CSV", encoding)
 

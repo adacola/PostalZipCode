@@ -2,7 +2,8 @@ source https://nuget.org/api/v2
 
 nuget FSharp.Core 4.0.0.1 redirects:force
 nuget FSharp.Data
-nuget FParsec
+nuget Newtonsoft.Json
 nuget NUnit
 nuget FsUnit
-nuget FsCheck
+nuget Argu
+nuget Basis.Core

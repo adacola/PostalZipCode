@@ -93,7 +93,7 @@ module Source =
                     match merging with
                     | [] -> if Regex.IsMatch(row.町域名, @"（") then result, [row] else [row]::result, []
                     | _ -> result, row::merging)
-            if List.isEmpty remainMerging then result else invalidOp "括弧の対応がとれていません。最後の閉じ括弧がありませんでした。"
+            if List.isEmpty remainMerging then result |> List.rev else invalidOp "括弧の対応がとれていません。最後の閉じ括弧がありませんでした。"
 
         /// 「一つの郵便番号で二以上の町域を表す場合の表示」フラグを使用して複数行をマージします。
         /// 2015年4月現在、例外レコードが存在するためこの方法では正しくマージできません。
@@ -108,7 +108,7 @@ module Source =
                         | prev::_ when prev.郵便番号 = row.郵便番号 -> result, row::merging
                         | _ -> (merging |> List.rev)::result, [row]
                     else [row]::(merging |> List.rev)::result, [])
-            remainMerging::result
+            remainMerging::result |> List.rev
 
     let readJapanpostSourceWithStragety (merge : seq<JapanpostSourceRow> -> #seq<JapanpostSourceRow list>) (tryToAddress : JapanpostSourceRow list -> Address list) (stream : Stream) =
         use reader = new StreamReader(stream, Encoding.GetEncoding "shift_jis")

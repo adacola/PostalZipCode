@@ -1,3 +1,5 @@
 FSharp.Core
 FSharp.Data
-FParsec
+Newtonsoft.Json
+Argu
+Basis.Core
